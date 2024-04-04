@@ -62,5 +62,13 @@ services:
       - "./log:/var/log/nginx:rw"
       - "./static:/opt/static:ro"
       - "./templates:/opt/templates:ro"
+      - "./certbot/www:/var/www/certbot:ro"
+      - "./certbot/conf:/etc/letsencrypt:ro"
     depends_on:
       - demo
+
+  certbot:
+    image: certbot/certbot:latest
+    volumes:
+      - "./certbot/www:/var/www/certbot:rw"
+      - "./certbot/conf:/etc/letsencrypt:rw"
